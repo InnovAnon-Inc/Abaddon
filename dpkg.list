@@ -1,0 +1,7 @@
+git
+wget
+zip
+g++
+binutils
+make
+xdg-utils
