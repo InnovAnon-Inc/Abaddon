@@ -64,5 +64,6 @@ WORKDIR /root
 #RUN mkdir -v oblige
 COPY CONFIG.txt .
 COPY oblige.sh  .
-CMD ./oblige.sh
+#CMD ./oblige.sh
 #CMD bash
+CMD ["/root/oblige.sh"]
