@@ -55,7 +55,7 @@ RUN rm -rf ObAddon
 
 WORKDIR /
 
-RUN apt-mark manual libfltk1.3{,-images} libxft2 libxinerama1 libjpeg8 libpng16-16 zlib1g
+RUN apt-mark manual libfltk1.3 libfltk-images1.3 libxft2 libxinerama1 libjpeg8 libpng16-16 zlib1g
 RUN apt-fast purge --autoremove -y `cat dpkg.list`
 RUN ./poobuntu-clean.sh
 RUN rm -v dpkg.list poobuntu-clean.sh
