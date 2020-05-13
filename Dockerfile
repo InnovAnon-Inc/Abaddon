@@ -1,8 +1,8 @@
 # TODO oblige fails to compile on modern systems;
 #      gives an error about trying to assign a packed structure to a short...
 #      is this 32-bit code?
-#FROM poobuntu:latest
-FROM ubuntu:18.04
+FROM poobuntu-18.04:latest
+#FROM ubuntu:18.04
 
 LABEL version="1.0"
 LABEL maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>"
@@ -15,13 +15,14 @@ LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/Abaddon"
 
-ENV TZ America/Chicago
+#ENV TZ America/Chicago
 
-RUN apt update
-RUN apt full-upgrade -y
+#RUN apt update
+#RUN apt full-upgrade -y
 COPY dpkg.list .
 #RUN apt-fast install -y `cat dpkg.list`
-RUN apt install -y `cat dpkg.list` libfltk1.3-dev libxft-dev libxinerama-dev libjpeg-dev libpng-dev zlib1g-dev
+# TODO uninstall dev libs
+RUN apt-fast install -y `cat dpkg.list`
 
 ENV B /usr
 RUN mkdir -pv ${B}/src
@@ -54,11 +55,10 @@ RUN rm -rf ObAddon
 
 WORKDIR /
 
-#RUN apt-fast purge --autoremove -y `cat dpkg.list`
-#RUN ./poobuntu-clean.sh
-#RUN rm -v dpkg.list poobuntu-clean.sh
-RUN apt purge --autoremove -y `cat dpkg.list`
-RUN rm -v dpkg.list
+RUN apt-mark manual libfltk1.3 libxft2 libxinerama1 libjpeg8 libpng16-16 zlib1g
+RUN apt-fast purge --autoremove -y `cat dpkg.list`
+RUN ./poobuntu-clean.sh
+RUN rm -v dpkg.list poobuntu-clean.sh
 
 WORKDIR /root
 #RUN mkdir -v oblige

@@ -5,3 +5,10 @@ g++
 binutils
 make
 xdg-utils
+
+libfltk1.3-dev
+libxft-dev
+libxinerama-dev
+libjpeg-dev
+libpng-dev
+zlib1g-dev
