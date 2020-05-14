@@ -18,8 +18,6 @@
 -- Demios
 -- https://github.com/caligari87/ObAddon/
 
-seed = 124958547
-
 ---- Game Settings ----
 
 game = doom2
@@ -58,7 +56,7 @@ trap_style = default
 trap_qty = harder
 cage_qty = fortified
 cages = mixed
-secret_monsters = yes
+secret_monsters = yesyes
 quiet_start = yes
 
 ---- Pickups ----
@@ -79,6 +77,12 @@ secrets_bonus = more
   environment_themes = random
 
 @debugger = 0
+  name_gen_test = none
+  build_levels = all
+  shape_rule_stats = no
+  print_prefab_use = yes
+  print_story_strings = yes
+  print_shape_steps = show
 
 @doom_mon_control = 1
   Spiderdemon = default
@@ -131,7 +135,34 @@ secrets_bonus = more
 
 @harder_enemy = 1
 
+@heretic_mon_control = 0
+  warrior = default
+  Ironlich = default
+  warrior_ghost = default
+  sabreclaw = default
+  gargoyle = default
+  nitro = default
+  ophidian = default
+  golem = default
+  weredragon = default
+  fire_garg = default
+  Maulotaur = default
+  D_Sparil = default
+  golem_ghost = default
+  nitro_ghost = default
+  disciple = default
+
+@heretic_weapon_control = 0
+  crossbow = default
+  gauntlets = default
+  hellstaff = default
+  claw = default
+  firemace = default
+  phoenix = default
+
 @jokewad_module = 0
+  fireblu_mode = disable
+  pandemic_mode = disable
 
 @level_control = 1
   mixin_type = normal
@@ -194,6 +225,62 @@ secrets_bonus = more
   gotcha_boss_fight = yes
   gotcha_qty = lots
 
+@quake2_mon_control = 0
+  Huge_flyer = default
+  parasite = default
+  beserker = default
+  brain = default
+  enforcer = default
+  grenader = default
+  medic = default
+  guard = default
+  guard_mg = default
+  Super_tank = default
+  tank_cmdr = default
+  flyer = default
+  shark = default
+  tank = default
+  gladiator = default
+  maiden = default
+  mutant = default
+  icarus = default
+  guard_sg = default
+  technician = default
+
+@quake2_weapon_control = 0
+  rocket = default
+  rail = default
+  machine = default
+  shotty = default
+  chain = default
+  ssg = default
+  bfg = default
+  hyper = default
+  grenade = default
+
+@quake_mon_control = 0
+  grunt = default
+  fiend = default
+  Shambler = default
+  ogre = default
+  enforcer = default
+  fish = default
+  dog = default
+  knight = default
+  tarbaby = default
+  dth_knight = default
+  Vore = default
+  scrag = default
+  zombie = default
+
+@quake_weapon_control = 0
+  rocket = default
+  nailgun = default
+  ssg = default
+  nailgun2 = default
+  zapper = default
+  grenade = default
+
 @sky_generator = 1
   force_hill_params = hp_random
   force_hills = hs_random
@@ -221,6 +308,13 @@ secrets_bonus = more
 
 @stealth_mons = 1
   qty = normal
+
+@theme_ctl_doom1 = 0
+  episode4 = no_change
+  episode3 = no_change
+  secret = no_change
+  episode2 = no_change
+  episode1 = no_change
 
 @theme_ctl_doom2 = 1
   secret = tech

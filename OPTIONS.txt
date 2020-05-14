@@ -1,0 +1,28 @@
+-- OPTIONS FILE : OBLIGE 7.70
+-- OBLIGE Level Maker (C) 2006-2017 Andrew Apted
+-- http://oblige.sourceforge.net/
+
+language = AUTO
+
+font_size      = 0
+alternate_look = 1
+wheel_can_bump = 0
+
+create_backups = 1
+overwrite_warning = 1
+debug_messages = 0
+
+last_directory = /usr/local/share/oblige/wads
+
+---- Enabled Addons ----
+
+addon = no_hang_lamp.pk3
+addon = obaddon.pk3
+
+---- Recent Files ----
+
+recent_wad = /root/oblige/wads/2020-5-12-1010_quietus_complete_flames.wad
+recent_wad = /root/oblige/wads/2020-5-13-2352_fatal_sludge.wad
+
+recent_config = /usr/local/share/oblige/CONFIG.txt
+

@@ -15,13 +15,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/Abaddon"
 
-#ENV TZ America/Chicago
-
-#RUN apt update
-#RUN apt full-upgrade -y
 COPY dpkg.list .
-#RUN apt-fast install -y `cat dpkg.list`
-# TODO uninstall dev libs
 RUN apt-fast install -y `cat dpkg.list`
 
 ENV B /usr
@@ -54,16 +48,14 @@ RUN rm -rf ObAddon
 
 
 WORKDIR /
-
 RUN apt-mark manual libfltk1.3 libfltk-images1.3 libxft2 libxinerama1 libjpeg8 libpng16-16 zlib1g
 RUN apt-fast purge --autoremove -y `cat dpkg.list`
 RUN ./poobuntu-clean.sh
 RUN rm -v dpkg.list poobuntu-clean.sh
 
-WORKDIR /root
-#RUN mkdir -v oblige
-COPY CONFIG.txt .
-COPY oblige.sh  .
-#CMD ./oblige.sh
-#CMD bash
-CMD ["/root/oblige.sh"]
+COPY CONFIG.txt  /usr/local/share/oblige
+COPY OPTIONS.txt /usr/local/share/oblige
+
+WORKDIR /root/oblige/wads
+CMD        ["/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
+ENTRYPOINT ["/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]

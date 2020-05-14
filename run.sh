@@ -20,6 +20,5 @@ docker build -t abaddon .
 #xhost +local:`whoami`
 docker volume inspect abaddonvol ||
 docker volume create  abaddonvol
-docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige abaddon
-#docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige abaddon bash
+docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon abaddon
 
