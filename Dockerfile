@@ -3,6 +3,7 @@
 #      is this 32-bit code?
 FROM poobuntu-18.04:latest
 #FROM ubuntu:18.04
+MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
 LABEL version="1.0"
 LABEL maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>"
@@ -57,5 +58,6 @@ COPY CONFIG.txt  /usr/local/share/oblige
 COPY OPTIONS.txt /usr/local/share/oblige
 
 WORKDIR /root/oblige/wads
-CMD        ["/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
-ENTRYPOINT ["/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
+CMD        ["--home", "/usr/local/share/oblige"]
+ENTRYPOINT ["/usr/local/bin/oblige"]
+#, "--home", "/usr/local/share/oblige"]
