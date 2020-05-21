@@ -17,7 +17,7 @@ LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/Abaddon"
 
 COPY dpkg.list .
-RUN apt-fast install -qy `cat dpkg.list`
+RUN apt-fast install `cat dpkg.list`
 
 ENV B /usr
 RUN mkdir -pv ${B}/src
