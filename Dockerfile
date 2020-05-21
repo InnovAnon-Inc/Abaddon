@@ -1,7 +1,7 @@
 # TODO oblige fails to compile on modern systems;
 #      gives an error about trying to assign a packed structure to a short...
 #      is this 32-bit code?
-FROM poobuntu-18.04:latest
+FROM innovanon/poobuntu-18.04:latest
 #FROM ubuntu:18.04
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
@@ -17,7 +17,7 @@ LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/Abaddon"
 
 COPY dpkg.list .
-RUN apt-fast install -y `cat dpkg.list`
+RUN apt-fast install -qy `cat dpkg.list`
 
 ENV B /usr
 RUN mkdir -pv ${B}/src
