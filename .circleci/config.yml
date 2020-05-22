@@ -3,7 +3,7 @@ jobs:
   build:
     docker: 
       - image: innovanon/abaddon:latest
-    parallelism: 4
+    #parallelism: 4
     steps:
       #- run:
       #    command: |
