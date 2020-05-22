@@ -14,12 +14,18 @@ docker version ||
 dockerd &
 
 sudo             -- \
-nice -n -20      -- \
+nice -n +20      -- \
 sudo -u `whoami` -- \
-docker build -t abaddon .
+docker build -t innovanon/abaddon .
+
 docker push innovanon/abaddon:latest || :
-#xhost +local:`whoami`
+
 docker volume inspect abaddonvol ||
 docker volume create  abaddonvol
-docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon abaddon
+
+#xhost +local:`whoami`
+sudo             -- \
+nice -n -20      -- \
+sudo -u `whoami` -- \
+docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
 

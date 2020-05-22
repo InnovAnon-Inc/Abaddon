@@ -1,7 +1,10 @@
 # TODO oblige fails to compile on modern systems;
 #      gives an error about trying to assign a packed structure to a short...
 #      is this 32-bit code?
-FROM innovanon/poobuntu-18.04:latest
+FROM innovanon/poobuntu:latest
+#FROM innovanon/poobuntu-18.04:latest
+#FROM innovanon/poobuntu-17.04:latest
+#FROM innovanon/poobuntu-16.04:latest
 #FROM innovanon/poobuntu:18.04
 #FROM ubuntu:18.04
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
@@ -25,15 +28,26 @@ RUN mkdir -pv ${B}/src
 WORKDIR ${B}/src
 
 RUN git clone --depth=1 https://github.com/caligari87/Oblige.git
+#RUN git clone --depth=1 https://github.com/GTD-Carthage/Oblige.git
+#RUN git clone --depth=1 https://github.com/simon-v/Oblige.git
+WORKDIR ${B}/src/Oblige
+RUN find . -iname \*.h -exec sed -i 's/#define *PACKEDATTR *__attribute__ *(( *packed *))/#define PACKEDATTR/' {} \;
+RUN mkdir -v obj_linux
+
 #RUN git clone --depth=1 https://git.code.sf.net/p/oblige/code2 Oblige
+#WORKDIR ${B}/src/Oblige
+#RUN mkdir -v obj_linux
+#RUN mkdir -v obj_linux/lua obj_linux/glbsp obj_linux/physfs obj_linux/ajpoly
+
 #RUN wget http://sourceforge.net/projects/oblige/files/Oblige/7.70/oblige-770-source.zip
+#RUN apt-fast install unzip
 #RUN unzip oblige-770-source.zip
 #RUN mv -v Oblige-7.70-source Oblige
-WORKDIR ${B}/src/Oblige
-RUN mkdir -v obj_linux
+#WORKDIR ${B}/src/Oblige
+
+RUN sed -i -e 's/-Wall/-w/g' -e '/xdg-desktop-menu/d' -e '/xdg-icon-resource/d' Makefile
 RUN make
-# fails to install icons in menu
-RUN make install || :
+RUN make install
 WORKDIR ${B}/src
 RUN rm -rf Oblige
 
@@ -50,8 +64,12 @@ RUN rm -rf ObAddon
 
 
 WORKDIR /
-RUN apt-mark manual libfltk1.3 libfltk-images1.3 libxft2 libxinerama1 libjpeg8 libpng16-16 zlib1g
-RUN apt-fast purge --autoremove -y `cat dpkg.list`
+COPY manual.list .
+RUN apt-mark manual `grep -v '^[\^#]' manual.list`
+RUN rm -v manual.list
+RUN apt-fast purge  `grep -v '^[\^#]' dpkg.list`
+# for sf src pkg
+#RUN apt-fast purge unzip
 RUN ./poobuntu-clean.sh
 RUN rm -v dpkg.list
 
