@@ -20,7 +20,7 @@ jobs:
       - run:
           command: |
             set -exu
-            cd /root/oblige/wads
+            #cd /root/oblige/wads
             oblige --home /usr/local/share/oblige --batch latest.wad
       - store_artifacts:
           path: latest.wad
