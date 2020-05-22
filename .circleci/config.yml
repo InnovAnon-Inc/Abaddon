@@ -22,6 +22,9 @@ jobs:
       #    path: latest.wad latest.wad.gpg
 workflows:
   version: 2.1
+  commit:
+    jobs:
+      - build
   nightly:
     triggers: #use the triggers key to indicate a scheduled build
       - schedule:
