@@ -28,3 +28,12 @@ workflows:
       - schedule:
           cron: "0 0 * * *" # use cron syntax to set the schedule
 
+    jobs:
+      build:
+        docker: 
+          - image: innovanon/abaddon:latest
+        parallelism: 4
+        steps:
+          - store_artifacts:
+              path: latest.wad
+
