@@ -27,12 +27,12 @@ ENV B /usr
 RUN mkdir -pv ${B}/src
 WORKDIR ${B}/src
 
-RUN git clone --depth=1 https://github.com/caligari87/Oblige.git
+#RUN git clone --depth=1 https://github.com/caligari87/Oblige.git
 #RUN git clone --depth=1 https://github.com/GTD-Carthage/Oblige.git
 #RUN git clone --depth=1 https://github.com/simon-v/Oblige.git
-WORKDIR ${B}/src/Oblige
-RUN find . -iname \*.h -exec sed -i 's/#define *PACKEDATTR *__attribute__ *(( *packed *))/#define PACKEDATTR/' {} \;
-RUN mkdir -v obj_linux
+#WORKDIR ${B}/src/Oblige
+#RUN find . -iname \*.h -exec sed -i 's/#define *PACKEDATTR *__attribute__ *(( *packed *))/#define PACKEDATTR/' {} \;
+#RUN mkdir -v obj_linux
 
 #RUN git clone --depth=1 https://git.code.sf.net/p/oblige/code2 Oblige
 #WORKDIR ${B}/src/Oblige
@@ -45,7 +45,12 @@ RUN mkdir -v obj_linux
 #RUN mv -v Oblige-7.70-source Oblige
 #WORKDIR ${B}/src/Oblige
 
-RUN sed -i -e 's/-Wall/-w/g' -e '/xdg-desktop-menu/d' -e '/xdg-icon-resource/d' Makefile
+#RUN sed -i -e 's/-Wall/-w/g' -e '/xdg-desktop-menu/d' -e '/xdg-icon-resource/d' Makefile
+
+RUN git clone --depth=1 https://github.com/InnovAnon-Inc/Oblige.git
+WORKDIR ${B}/src/Oblige
+RUN make normalize
+
 RUN make
 RUN make install
 WORKDIR ${B}/src
