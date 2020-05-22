@@ -17,6 +17,7 @@ sudo             -- \
 nice -n -20      -- \
 sudo -u `whoami` -- \
 docker build -t abaddon .
+docker push innovanon/abaddon:latest || :
 #xhost +local:`whoami`
 docker volume inspect abaddonvol ||
 docker volume create  abaddonvol
