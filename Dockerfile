@@ -1,8 +1,8 @@
 # TODO oblige fails to compile on modern systems;
 #      gives an error about trying to assign a packed structure to a short...
 #      is this 32-bit code?
-#FROM innovanon/poobuntu-18.04:latest
-FROM innovanon/poobuntu:18.04
+FROM innovanon/poobuntu-18.04:latest
+#FROM innovanon/poobuntu:18.04
 #FROM ubuntu:18.04
 MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
