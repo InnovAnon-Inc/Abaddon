@@ -19,6 +19,7 @@ jobs:
       #     #  latest.wad latest.wad.gpg
       cd /root/oblige/wads
       oblige --home /usr/local/share/oblige --batch latest.wad
+
     - store_artifacts:
           path: latest.wad
       #    path: latest.wad latest.wad.gpg
