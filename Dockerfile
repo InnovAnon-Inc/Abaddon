@@ -94,7 +94,7 @@ RUN rm -rf ${B}/src/ObAddon                        \
 COPY CONFIG.txt OPTIONS.txt /usr/local/share/oblige/
 
 WORKDIR /root/oblige/wads
-#CMD        ["--home", "/usr/local/share/oblige"]
-CMD        ["--home", "/usr/local/share/oblige", "--batch", "latest.wad"]
+CMD        ["--home", "/usr/local/share/oblige"]
+#CMD        ["--home", "/usr/local/share/oblige", "--batch", "latest.wad"]
 ENTRYPOINT ["/usr/local/bin/oblige"]
 #, "--home", "/usr/local/share/oblige"]
