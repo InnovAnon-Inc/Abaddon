@@ -26,7 +26,6 @@ COPY dpkg.list .
 RUN apt-fast install `grep -v '^[\^#]' dpkg.list` \
  && mkdir -pv ${B}/src
 
-#RUN mkdir -pv ${B}/src
 WORKDIR ${B}/src
 
 #RUN git clone --depth=1 https://github.com/caligari87/Oblige.git
@@ -47,41 +46,58 @@ WORKDIR ${B}/src
 #RUN mv -v Oblige-7.70-source Oblige
 #WORKDIR ${B}/src/Oblige
 
-#RUN sed -i -e 's/-Wall/-w/g' -e '/xdg-desktop-menu/d' -e '/xdg-icon-resource/d' Makefile
+#RUN git clone --depth=1 https://github.com/InnovAnon-Inc/Oblige.git
+#WORKDIR ${B}/src/Oblige
+#RUN make normalize \
+# && make           \
+# && make install
 
-RUN git clone --depth=1 https://github.com/InnovAnon-Inc/Oblige.git
-WORKDIR ${B}/src/Oblige
-RUN make normalize \
- && make           \
+RUN wget -qO- https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+  | busybox unzip -
+WORKDIR Oblige-master
+RUN chmod -v +x misc/normalize-source.sh \
+ && make normalize \
+ && make \
  && make install
-#RUN make
-#RUN make install
-WORKDIR ${B}/src
-RUN rm -rf Oblige \
- && git clone --depth=1 https://github.com/caligari87/ObAddon.git
+#RUN find . -iname \*.lua -exec chmod -v +x {} + \
 
-#RUN git clone --depth=1 https://github.com/caligari87/ObAddon.git
-WORKDIR ${B}/src/ObAddon/scripts
-RUN chmod -v +x normalize-source.sh \
- && make normalize                  \
- && make                            \
+WORKDIR ${B}/src
+#RUN rm -rf Oblige \
+# && git clone --depth=1 https://github.com/caligari87/ObAddon.git
+#WORKDIR ${B}/src/ObAddon/scripts
+RUN rm -rf Oblige-master \
+ && wget -qO- https://github.com/caligari87/ObAddon/archive/master.zip \
+  | busybox unzip -
+WORKDIR ObAddon-master/scripts
+RUN sed -i 's/zip -vr/zip -Z bzip2 -9 -r/' makefile \
+ && chmod -v +x normalize-source.sh \
+ && make normalize \
+ && make           \
  && install build/obaddon.pk3 /usr/local/share/oblige/addons/
-#RUN make normalize
-#RUN make
-#WORKDIR build
-#RUN install obaddon.pk3 /usr/local/share/oblige/addons/
-#WORKDIR ${B}/src
-#RUN rm -rf ObAddon
+# && mkdir -v obaddon
+#WORKDIR obaddon
+#RUN busybox unzip ../build/obaddon.pk3          \
+# && zip -Z bzip2 -9 -r /usr/local/share/oblige/addons/obaddon.pk3 .
+##RUN busybox unzip ../build/obaddon.pk3          \
+## && zip -Z bzip2 -9 -r /usr/local/share/oblige/addons/obaddon.pk3 .
+## && install build/obaddon.pk3 /usr/local/share/oblige/addons/
+##RUN make normalize
+##RUN make
+##WORKDIR build
+##RUN install obaddon.pk3 /usr/local/share/oblige/addons/
+##WORKDIR ${B}/src
+##RUN rm -rf ObAddon
 
 
 
 WORKDIR /
 COPY manual.list .
-RUN rm -rf ${B}/src/ObAddon                        \
+RUN rm -rf ${B}/src/ObAddon-master                 \
  && apt-mark manual `grep -v '^[\^#]' manual.list` \
  && apt-fast purge  `grep -v '^[\^#]' dpkg.list`   \
  && ./poobuntu-clean.sh                            \
  && rm -v manual.list dpkg.list
+
 #RUN rm -v manual.list
 #RUN apt-fast purge  `grep -v '^[\^#]' dpkg.list`
 # for sf src pkg
@@ -94,7 +110,8 @@ RUN rm -rf ${B}/src/ObAddon                        \
 COPY CONFIG.txt OPTIONS.txt /usr/local/share/oblige/
 
 WORKDIR /root/oblige/wads
-CMD        ["--home", "/usr/local/share/oblige"]
-#CMD        ["--home", "/usr/local/share/oblige", "--batch", "latest.wad"]
+#CMD        ["--home", "/usr/local/share/oblige"]
+CMD        ["--home", "/usr/local/share/oblige", "--batch", "latest.wad"]
 ENTRYPOINT ["/usr/local/bin/oblige"]
 #, "--home", "/usr/local/share/oblige"]
+

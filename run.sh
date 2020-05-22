@@ -27,8 +27,8 @@ xhost +local:`whoami`
 sudo             -- \
 nice -n -20      -- \
 sudo -u `whoami` -- \
-#docker run   -t --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
 docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
+#docker run   -t --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
 
 # Create but don't run container from resulting image
 CID=$(docker create --mount source=abaddonvol,target=/root/oblige innovanon/abaddon)
