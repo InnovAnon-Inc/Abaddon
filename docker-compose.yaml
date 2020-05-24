@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 services:
   abaddon:
     build: .
@@ -6,6 +6,8 @@ services:
     #restart: unless-stopped
     volumes:
       - abaddonvol:/root/oblige:rw
+    image: innovanon/abaddon:latest
+    container_name: innovanon/abaddon
 
 volumes:
   abaddonvol:
