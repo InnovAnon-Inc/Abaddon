@@ -30,6 +30,8 @@ sudo -u `whoami` -- \
 docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
 #docker run   -t --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
 
+# https://www.reddit.com/r/docker/comments/9ou9wx/getting_build_artifacts_out_of_docker_image/
+
 # Create but don't run container from resulting image
 CID=$(docker create --mount source=abaddonvol,target=/root/oblige innovanon/abaddon)
 
