@@ -1,8 +1,8 @@
-version: '3'
+version: '3.3'
 services:
-  abaddon:
+  abaddon-gui:
     build: .
-    hostname: abaddon
+    hostname: abaddon-gui
     #restart: unless-stopped
     volumes:
       - abaddonvol:/root/oblige:rw
@@ -20,6 +20,8 @@ services:
     #  - /usr/local/bin/oblige
     #  - --home
     #  - /usr/local/share/oblige
+    image: innovanon/abaddon-gui:latest
+    container_name: innovanon/abaddon-gui
 
 volumes:
   abaddonvol:
