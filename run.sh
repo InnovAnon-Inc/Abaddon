@@ -1,24 +1,26 @@
 #! /bin/bash
 set -exu
+[[ $# -eq 0 ]]
 
-if ! command -v dockerd ; then
-	command -v wget ||
-	apt install wget
-	wget -nc https://download.docker.com/linux/static/stable/x86_64/docker-19.03.8.tgz
-	[ -d docker-19.03.8 ] ||
-	tar xf docker-19.03.8.tgz
-	install docker/* /usr/local/bin/
-fi
-
-docker version ||
-dockerd &
-
+cat > /dev/null << "EOF"
 sudo             -- \
 nice -n +20      -- \
 sudo -u `whoami` -- \
-docker build -t innovanon/abaddon .
+docker-compose build
 
 docker push innovanon/abaddon:latest || :
+
+trap 'docker-compose down' 0
+
+xhost +local:`whoami`
+sudo             -- \
+nice -n +20      -- \
+sudo -u `whoami` -- \
+docker-compose up --force-recreate
+EOF
+
+docker version ||
+dockerd &
 
 docker volume inspect abaddonvol ||
 docker volume create  abaddonvol
@@ -27,10 +29,10 @@ xhost +local:`whoami`
 sudo             -- \
 nice -n +20      -- \
 sudo -u `whoami` -- \
-docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
-#docker run   -t --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon
+docker-compose up --build
+#docker-compose up -d --build
 
-# https://www.reddit.com/r/docker/comments/9ou9wx/getting_build_artifacts_out_of_docker_image/
+#docker run   -t --net=host -e DISPLAY=${DISPLAY} --mount source=abaddonvol,target=/root/oblige --rm --name abaddon innovanon/abaddon --help
 
 # Create but don't run container from resulting image
 CID=$(docker create --mount source=abaddonvol,target=/root/oblige innovanon/abaddon)

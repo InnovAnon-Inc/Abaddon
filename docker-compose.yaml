@@ -1,0 +1,13 @@
+version: '3'
+services:
+  abaddon:
+    build: .
+    hostname: abaddon
+    #restart: unless-stopped
+    volumes:
+      - abaddonvol:/root/oblige:rw
+
+volumes:
+  abaddonvol:
+    external: true
+

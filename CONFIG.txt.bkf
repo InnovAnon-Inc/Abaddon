@@ -18,8 +18,6 @@
 -- Demios
 -- https://github.com/caligari87/ObAddon/
 
-seed = 51623889
-
 ---- Game Settings ----
 
 game = doom2
@@ -47,19 +45,18 @@ zdoom_skybox = themed
 ---- Monsters ----
 
 mons = prog
-mix_it_up_upper_range = rare
+mix_it_up_upper_range = scarce
 mix_it_up_lower_range = rarest
 strength = easier
 ramp_up = epi
 mon_variety = mixed
 bosses = harder
-bossesnormal = all
 traps = mixed
 trap_style = default
 trap_qty = harder
 cage_qty = fortified
 cages = mixed
-secret_monsters = yes
+secret_monsters = yesyes
 quiet_start = yes
 
 ---- Pickups ----
@@ -81,34 +78,31 @@ secrets_bonus = more
 
 @debugger = 0
   name_gen_test = none
+  build_levels = all
   shape_rule_stats = no
   print_prefab_use = yes
   print_story_strings = yes
-  steppy_caves = yes
-  build_levels = all
-  foreshadowing_exit = no
   print_shape_steps = show
-  fake_room_vista = yes
 
 @doom_mon_control = 1
-  Spiderdemon = scarce
-  caco = scarce
-  gunner = scarce
-  skull = scarce
-  demon = scarce
-  knight = scarce
-  vile = scarce
-  zombie = scarce
-  Cyberdemon = scarce
-  ss_nazi = scarce
-  baron = scarce
-  spectre = scarce
-  arach = scarce
-  mancubus = scarce
-  revenant = scarce
-  pain = scarce
-  imp = scarce
-  shooter = scarce
+  Spiderdemon = default
+  caco = default
+  gunner = default
+  skull = default
+  demon = default
+  knight = default
+  vile = default
+  zombie = default
+  Cyberdemon = default
+  ss_nazi = default
+  baron = default
+  spectre = default
+  arach = default
+  mancubus = default
+  revenant = default
+  pain = default
+  imp = default
+  shooter = default
 
 @doom_weapon_control = 1
   super = default
@@ -119,7 +113,7 @@ secrets_bonus = more
   plasma = default
   shotty = default
 
-@export_map = 0
+@export_map = 1
 
 @fauna_module = 1
   flies = enable
@@ -129,7 +123,7 @@ secrets_bonus = more
   boss_gen_types = no
   boss_gen_hpbar = yes
   boss_gen_diff = default
-  boss_gen_hitscan = less
+  boss_gen_hitscan = default
   boss_gen_music = yes
   boss_gen_reinforcerate = default
   boss_gen_health = default
@@ -197,7 +191,7 @@ secrets_bonus = more
   corner_style = random
   liquid_sinks = yes
   darkness = mixed
-  brightness_offset = -1
+  brightness_offset = none
   barrels = mixed
   doors = mixed
   keys = mixed
@@ -291,26 +285,26 @@ secrets_bonus = more
   force_hill_params = hp_random
   force_hills = hs_random
   force_sky = sky_default
-  terrain_color = GREENISH_HILLS
-  nebula_color = RED_NEBULA
+  terrain_color = default
+  nebula_color = default
   influence_map_darkness = yes
   cloud_color = RAINBOW_CLOUDS
 
 @small_spiderdemon = 0
 
 @stealth_mon_control = 1
-  stealth_demon = scarce
-  stealth_baron = scarce
-  stealth_zombie = scarce
-  stealth_caco = scarce
-  stealth_imp = scarce
-  stealth_mancubus = scarce
-  stealth_arach = scarce
-  stealth_revenant = scarce
-  stealth_shooter = scarce
-  stealth_vile = scarce
-  stealth_knight = scarce
-  stealth_gunner = scarce
+  stealth_demon = default
+  stealth_baron = default
+  stealth_zombie = default
+  stealth_caco = default
+  stealth_imp = default
+  stealth_mancubus = default
+  stealth_arach = default
+  stealth_revenant = default
+  stealth_shooter = default
+  stealth_vile = default
+  stealth_knight = default
+  stealth_gunner = default
 
 @stealth_mons = 1
   qty = normal
