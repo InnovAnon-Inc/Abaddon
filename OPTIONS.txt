@@ -12,7 +12,7 @@ create_backups = 1
 overwrite_warning = 1
 debug_messages = 0
 
-last_directory = /usr/local/share/oblige/wads
+last_directory = /root/oblige/wads
 
 ---- Enabled Addons ----
 

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  abaddon:
+    build: .
+    hostname: abaddon
+    #restart: unless-stopped
+    volumes:
+      - abaddonvol:/root/oblige:rw
+      - ./CONFIG.txt:/usr/local/share/oblige/CONFIG.txt:rw
+      - ./OPTIONS.txt:/usr/local/share/oblige/OPTIONS.txt:rw
+      - $XAUTHORITY:$XAUTHORITY
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw 
+      - /etc/localtime:/etc/localtime:rw
+    privileged: true
+    #network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY
+    #entrypoint:
+    #  - /usr/local/bin/oblige
+    #  - --home
+    #  - /usr/local/share/oblige
+
+volumes:
+  abaddonvol:
+    external: true
+
