@@ -20,10 +20,15 @@ RUN apt-fast install `grep -v '^[\^#]' dpkg.list` \
 
 WORKDIR ${B}/src
 
-RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+RUN apt-fast install wget \
+ && wget -qO- https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
   | busybox unzip -q -                                               \
- && pcurl https://github.com/caligari87/ObAddon/archive/master.zip   \
+ && wget -qO- https://github.com/caligari87/ObAddon/archive/master.zip   \
   | busybox unzip -q -
+#RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+#  | busybox unzip -q -                                               \
+# && pcurl https://github.com/caligari87/ObAddon/archive/master.zip   \
+#  | busybox unzip -q -
 
 WORKDIR ${B}/src/Oblige-master
 RUN chmod -v +x misc/normalize-source.sh \

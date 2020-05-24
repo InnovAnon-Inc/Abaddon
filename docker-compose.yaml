@@ -7,7 +7,7 @@ services:
     volumes:
       - abaddonvol:/root/oblige:rw
     image: innovanon/abaddon:latest
-    container_name: innovanon/abaddon
+    container_name: abaddon
 
 volumes:
   abaddonvol:
