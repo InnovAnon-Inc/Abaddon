@@ -21,7 +21,7 @@ services:
     #  - --home
     #  - /usr/local/share/oblige
     image: innovanon/abaddon-gui:latest
-    container_name: innovanon/abaddon-gui
+    container_name: abaddon-gui
 
 volumes:
   abaddonvol:
