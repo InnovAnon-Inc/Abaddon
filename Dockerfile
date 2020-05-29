@@ -15,21 +15,22 @@ LABEL version="1.0"                                                     \
 ENV B /usr
 
 COPY dpkg.list manual.list ./
-RUN apt-fast install `grep -v '^[\^#]' dpkg.list` \
+RUN apt-fast update \
+ && apt-fast install `grep -v '^[\^#]' dpkg.list` \
  && mkdir -pv ${B}/src
+
+# sanity check
+RUN command -v busybox
 
 WORKDIR ${B}/src
 
-<<<<<<< HEAD
-RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+#RUN apt-fast update 
+#RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+#  | busybox unzip -q -                                               \
+# && pcurl https://github.com/caligari87/ObAddon/archive/master.zip   \
+RUN curl -qL https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
   | busybox unzip -q -                                               \
- && pcurl https://github.com/caligari87/ObAddon/archive/master.zip   \
-=======
-RUN apt-fast install wget \
- && wget -qO- https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
-  | busybox unzip -q -                                               \
- && wget -qO- https://github.com/caligari87/ObAddon/archive/master.zip   \
->>>>>>> 788b6e23f3bbc2c6792a4db1c38631c579675974
+ && curl -qL https://github.com/caligari87/ObAddon/archive/master.zip   \
   | busybox unzip -q -
 #RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
 #  | busybox unzip -q -                                               \
@@ -44,7 +45,6 @@ RUN chmod -v +x misc/normalize-source.sh \
 #RUN find . -iname \*.lua -exec chmod -v +x {} + \
 
 WORKDIR ${B}/src/ObAddon-master/scripts
-<<<<<<< HEAD
 #RUN rm -rf Oblige \
 # && git clone --depth=1 https://github.com/caligari87/ObAddon.git
 #WORKDIR ${B}/src/ObAddon/scripts
@@ -52,9 +52,7 @@ WORKDIR ${B}/src/ObAddon-master/scripts
 # && wget -qO- https://github.com/caligari87/ObAddon/archive/master.zip \
 #  | busybox unzip -q -
 #WORKDIR ObAddon-master/scripts
-=======
 #RUN sed -i 's/zip -vr/zip -q -Z bzip2 -9 -r/' makefile \
->>>>>>> 788b6e23f3bbc2c6792a4db1c38631c579675974
 RUN sed -i 's/zip -vr/zip -q -9 -r/' makefile \
  && chmod -v +x normalize-source.sh           \
  && make normalize                            \
@@ -68,17 +66,14 @@ RUN rm -rf ${B}/src/Oblige-master ${B}/src/ObAddon-master \
  && ./poobuntu-clean.sh                                   \
  && rm -v manual.list dpkg.list
 
-<<<<<<< HEAD
 #COPY CONFIG.txt OPTIONS.txt /usr/local/share/oblige/
 
 WORKDIR /root/oblige/wads
-=======
 # TODO figure out a way to have DockerHub mount these as vols with rw perms
 COPY CONFIG.txt OPTIONS.txt /usr/local/share/oblige/
 
 WORKDIR /root/oblige/wads
 
-CMD        ["--batch", "latest.wad"]
->>>>>>> 788b6e23f3bbc2c6792a4db1c38631c579675974
+#CMD        ["--batch", "latest.wad"]
 ENTRYPOINT ["/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
 

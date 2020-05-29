@@ -22,11 +22,7 @@ docker-compose up --build --force-recreate
 
 WAD=`hostname`-`date +%Y-%m-%d.%H-%M-%S.%N`.wad
 ( # Create but don't run container from resulting image
-<<<<<<< HEAD
   CID=$(docker create --mount source=abaddonvol,target=/root/oblige innovanon/abaddon-gui)
-=======
-  CID=$(docker create --mount source=abaddonvol,target=/root/oblige innovanon/abaddon)
->>>>>>> 788b6e23f3bbc2c6792a4db1c38631c579675974
 
   # Container be gone
   trap "docker rm ${CID}" 0
@@ -43,13 +39,7 @@ done
 
 docker-compose push
 ( #git pull
-<<<<<<< HEAD
   git add .
   git commit -m "auto commit by $0"
   git push ) || :
-=======
-git add .
-git commit -m "auto commit by $0"
-git push ) || :
->>>>>>> 788b6e23f3bbc2c6792a4db1c38631c579675974
 
