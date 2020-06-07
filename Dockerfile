@@ -28,9 +28,9 @@ WORKDIR ${B}/src
 #RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
 #  | busybox unzip -q -                                               \
 # && pcurl https://github.com/caligari87/ObAddon/archive/master.zip   \
-RUN curl -qL https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+RUN curl -L https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
   | busybox unzip -q -                                               \
- && curl -qL https://github.com/caligari87/ObAddon/archive/master.zip   \
+ && curl -L https://github.com/caligari87/ObAddon/archive/master.zip   \
   | busybox unzip -q -
 #RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
 #  | busybox unzip -q -                                               \

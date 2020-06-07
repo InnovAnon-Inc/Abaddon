@@ -18,8 +18,6 @@
 -- Demios
 -- https://github.com/caligari87/ObAddon/
 
-seed = 51623889
-
 ---- Game Settings ----
 
 game = doom2
@@ -32,6 +30,7 @@ theme = epi
 size = prog
 streets_mode = 25urban
 linear_mode = 10
+nature_mode = 10
 outdoors = mixed
 caves = mixed
 liquids = mixed
@@ -81,14 +80,11 @@ secrets_bonus = more
 
 @debugger = 0
   name_gen_test = none
+  build_levels = all
   shape_rule_stats = no
   print_prefab_use = yes
   print_story_strings = yes
-  steppy_caves = yes
-  build_levels = all
-  foreshadowing_exit = no
   print_shape_steps = show
-  fake_room_vista = yes
 
 @doom_mon_control = 1
   Spiderdemon = scarce
@@ -181,6 +177,7 @@ secrets_bonus = more
 @misc = 1
   pistol_starts = yes
   alt_starts = yes
+  foreshadowing_exit = yes
   big_rooms = mixed
   big_outdoor_rooms = mixed
   room_heights = mixed
@@ -220,7 +217,7 @@ secrets_bonus = more
 @music_swapper = 1
 
 @prefab_control = 1
-  match_theme = on
+  fab_match_theme = on
   wall_prob = fab_random
   point_prob = fab_default
   autodetail = on
