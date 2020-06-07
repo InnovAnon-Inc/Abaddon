@@ -15,15 +15,15 @@ LABEL version="1.0"                                                     \
 ENV B /usr
 
 COPY dpkg.list manual.list ./
-RUN apt-fast install `grep -v '^[\^#]' dpkg.list` \
+RUN apt-fast update \
+ && apt-fast install `grep -v '^[\^#]' dpkg.list` \
  && mkdir -pv ${B}/src
 
 WORKDIR ${B}/src
 
-RUN apt-fast install wget \
- && wget -qO- https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
+RUN curl -L https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
   | busybox unzip -q -                                               \
- && wget -qO- https://github.com/caligari87/ObAddon/archive/master.zip   \
+ && curl -L https://github.com/caligari87/ObAddon/archive/master.zip   \
   | busybox unzip -q -
 #RUN pcurl https://github.com/InnovAnon-Inc/Oblige/archive/master.zip \
 #  | busybox unzip -q -                                               \
