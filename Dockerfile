@@ -3,7 +3,7 @@ FROM innovanon/void-base as builder
 RUN sleep 91 \
  && xbps-install -Suy
 RUN sleep 91 \
- && xbps-install   -y zip xdg-utils
+ && xbps-install   -y zip
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -267,6 +267,19 @@ RUN cd fltk                              \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+ && make                                 \
+ && make install                         \
+ && git reset --hard                     \
+ && git clean -fdx                       \
+ && git clean -fdx                       \
+ && cd ..
+RUN sleep 91                             \
+ && git clone --depth=1 --recursive https://gitlab/freedesktop.org/xdg/xdg-utils.git
+RUN cd xdg-utils                         \
+ && autoreconf -fi                       \
+ && ./configure --prefix=$PREFIX         \
+      --enable-static                    \
+      --disable-static                   \
  && make                                 \
  && make install                         \
  && git reset --hard                     \

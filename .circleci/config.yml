@@ -1,0 +1,90 @@
+version: 2.1 # use CircleCI 2.0
+
+orbs:
+  deepcode: arrai/deepcode@1.1.0
+  jira: circleci/jira@1.0.5
+  slack: circleci/slack@4.2.0
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context:
+            - default
+          #post-steps:
+          #  - jira/notify
+  nightly:
+    triggers: #use the triggers key to indicate a scheduled build
+      - schedule:
+          cron: "0 0 * * *" # use cron syntax to set the schedule
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - nightly
+
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:latest
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      #- run: git submodule sync
+      #- run: git submodule update --init
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache \
+              make openssl tar gzip curl jq
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build \
+              --cache-from=abaddon \
+              -t innovanon/abaddon \
+              --build-arg TEST=1 .
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              #docker tag lfs-builder "InnovAnon-Inc/lfs-builder:${CIRCLE_SHA1}"
+              #docker push           "InnovAnon-Inc/lfs-builder:${CIRCLE_SHA1}"
+              docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+              docker push innovanon/abaddon
+            fi
+      - run:
+          name: Push upstream (abaddon-2)
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl --location --request POST \
+                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/abaddon-2/pipeline' \
+                --header 'Content-Type: application/json' \
+                -u "${API_TOKEN}:"
+            fi
+      - slack/notify:
+          event: fail
+          mentions: '@InnovAnon-Inc'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+
+  nightly:
+    docker: 
+      - image: innovanon/abaddon:latest
+    steps:
+      - run:
+          command: |
+            set -exu
+            #cd /root/oblige/wads
+            oblige --home /usr/local/share/oblige --batch latest.wad
+      - store_artifacts:
+          path: latest.wad
+      #    path: latest.wad latest.wad.gpg
+      
