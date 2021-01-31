@@ -3,7 +3,7 @@ FROM innovanon/void-base as builder
 RUN sleep 91 \
  && xbps-install -Suy
 RUN sleep 91 \
- && xbps-install   -y gettext gperf po4a zip
+ && xbps-install   -y gettext-devel gperf zip
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -317,8 +317,15 @@ COPY --from=builder / /
 RUN chown -R tor:tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
 
+FROM squash as test
+RUN sleep 91                        \
+ && tor --verify-config             \
+ && xbps-install -S
+
+FROM squash as final
 VOLUME  /root/oblige/wads
 WORKDIR /root/oblige/wads
+RUN oblige --home /usr/locall/share/oblige --batch latest.wad
 ENTRYPOINT ["/bin/bash", "-l", "-c", "/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
 CMD                                                          ["--batch", "latest.wad"]
 
