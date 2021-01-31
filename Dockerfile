@@ -3,7 +3,7 @@ FROM innovanon/void-base as builder
 RUN sleep 91 \
  && xbps-install -Suy
 RUN sleep 91 \
- && xbps-install   -y zip
+ && xbps-install   -y gperf zip
 
 ARG CPPFLAGS
 ARG   CFLAGS
