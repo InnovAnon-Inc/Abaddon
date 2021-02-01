@@ -268,39 +268,39 @@ RUN cd util-macros                       \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xorgproto.git
-RUN cd xorgproto                         \
- && ./autogen.sh                         \
- && ./configure --prefix=$PREFIX         \
-      --enable-static                    \
-      --disable-shared                   \
-      -Dlegacy=true                      \
-	CPPFLAGS="$CPPFLAGS"                 \
-	CXXFLAGS="$CXXFLAGS"                 \
-	CFLAGS="$CFLAGS"                     \
-	LDFLAGS="$LDFLAGS"                   \
-        CPATH="$CPATH"                                \
-        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
-        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
-        LIBRARY_PATH="$LIBRARY_PATH"                  \
-        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
-        LD_RUN_PATH="$LD_RUN_PATH"                    \
-        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
-        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
-        CC="$CC"                             \
-        CXX="$CXX"                           \
-        FC="$FC"                             \
-        NM="$NM"                             \
-        AR="$AR"                             \
-        RANLIB="$RANLIB"                     \
-        STRIP="$STRIP"                       \
- && make install                         \
- && git reset --hard                     \
- && git clean -fdx                       \
- && git clean -fdx                       \
- && cd ..                                \
- && ldconfig
+#RUN sleep 91                             \
+# && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xorgproto.git
+#RUN cd xorgproto                         \
+# && ./autogen.sh                         \
+# && ./configure --prefix=$PREFIX         \
+#      --enable-static                    \
+#      --disable-shared                   \
+#      -Dlegacy=true                      \
+#	CPPFLAGS="$CPPFLAGS"                 \
+#	CXXFLAGS="$CXXFLAGS"                 \
+#	CFLAGS="$CFLAGS"                     \
+#	LDFLAGS="$LDFLAGS"                   \
+#        CPATH="$CPATH"                                \
+#        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+#        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+#        LIBRARY_PATH="$LIBRARY_PATH"                  \
+#        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+#        LD_RUN_PATH="$LD_RUN_PATH"                    \
+#        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+#        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+#        CC="$CC"                             \
+#        CXX="$CXX"                           \
+#        FC="$FC"                             \
+#        NM="$NM"                             \
+#        AR="$AR"                             \
+#        RANLIB="$RANLIB"                     \
+#        STRIP="$STRIP"                       \
+# && make install                         \
+# && git reset --hard                     \
+# && git clean -fdx                       \
+# && git clean -fdx                       \
+# && cd ..                                \
+# && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXau.git
 RUN cd libXau                            \
