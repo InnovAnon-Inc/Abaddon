@@ -405,6 +405,7 @@ RUN cd libxcb                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libX11.git
 RUN cd libX11                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
@@ -437,6 +438,7 @@ RUN cd libX11                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXext.git
 RUN cd libXext                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
@@ -469,6 +471,7 @@ RUN cd libXext                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXfixes.git
 RUN cd libXfixes                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
@@ -497,10 +500,11 @@ RUN cd libXfixes                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXrender.git
 RUN cd libXrender                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
@@ -533,6 +537,7 @@ RUN cd libXrender                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXft.git
 RUN cd libXft                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
@@ -565,6 +570,7 @@ RUN cd libXft                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXinerama.git
 RUN cd libXinerama                            \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \

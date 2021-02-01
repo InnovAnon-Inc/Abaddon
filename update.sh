@@ -22,7 +22,7 @@ for k in $(seq 7) ; do
   xbps-install   -y gettext gettext-devel gettext-libs gperf pkg-config po4a texinfo zip \
                     fontconfig-devel xorgproto libXau-devel libxcb-devel libX11-devel    \
 		    libXext-devel libXrender-devel libXft-devel libXinerama-devel        \
-		    fltk-devel xdg-utils || continue
+		    fltk-devel xdg-utils libXfixes-devel || continue
   FLAG=1
   break
 done
