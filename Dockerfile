@@ -337,6 +337,8 @@ RUN cd libXau                            \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
 RUN cd xcbproto                          \
+ && ls -ltra \
+ && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
