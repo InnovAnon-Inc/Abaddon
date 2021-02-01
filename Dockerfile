@@ -3,7 +3,7 @@ FROM innovanon/void-base as builder
 RUN sleep 91 \
  && xbps-install -Suy
 RUN sleep 91 \
- && xbps-install   -y gettext gettext-devel gettext-libs gperf zip
+ && xbps-install   -y gettext gettext-devel gettext-libs gperf po4a zip
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -102,9 +102,11 @@ RUN cd freetype                          \
  && sed -r  "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:"       \
          -i include/freetype/config/ftoption.h         \
  && ./autogen.sh                         \
+ && ./configure --help                   \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+      FREETYPE_LIBS=$PREFIX/lib          \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
