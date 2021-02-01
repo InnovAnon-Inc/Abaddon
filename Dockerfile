@@ -3,7 +3,7 @@ FROM innovanon/void-base as builder
 RUN sleep 91 \
  && xbps-install -Suy
 RUN sleep 91 \
- && xbps-install   -y expat gettext gettext-devel gettext-libs gperf pkg-config po4a texinfo zip
+ && xbps-install   -y gettext gettext-devel gettext-libs gperf pkg-config po4a texinfo zip
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -62,7 +62,8 @@ RUN cd zlib                           \
  && git reset --hard                  \
  && git clean -fdx                    \
  && git clean -fdx                    \
- && cd ..
+ && cd ..                             \
+ && ldconfig
 RUN sleep 91                          \
  && git clone --depth=1 --recursive https://github.com/glennrp/libpng.git
 RUN cd libpng                         \
@@ -75,7 +76,8 @@ RUN cd libpng                         \
  && git reset --hard                  \
  && git clean -fdx                    \
  && git clean -fdx                    \
- && cd ..
+ && cd ..                             \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://github.com/libjpeg-turbo/libjpeg-turbo.git
 RUN cd libjpeg-turbo                     \
@@ -94,7 +96,23 @@ RUN cd libjpeg-turbo                     \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
+RUN sleep 91                             \
+ && git clone --depth=1 --recursive https://github.com/libexpat/libexpat.git
+RUN cd libexpat/expat                    \
+ && ./buildconf.sh                       \
+ && ./configure --prefix=$PREFIX         \
+      --enable-static                    \
+      --disable-shared                   \
+ && make                                 \
+ && make install                         \
+ && cd ..                                \
+ && git reset --hard                     \
+ && git clean -fdx                       \
+ && git clean -fdx                       \
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://github.com/freetype/freetype.git
 RUN cd freetype                          \
@@ -112,7 +130,8 @@ RUN cd freetype                          \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://github.com/freedesktop/fontconfig.git
 RUN cd fontconfig                        \
@@ -126,7 +145,8 @@ RUN cd fontconfig                        \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/util/macros.git util-macros
 RUN cd util-macros                       \
@@ -138,7 +158,8 @@ RUN cd util-macros                       \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xorgproto.git
 RUN cd xorgproto                         \
@@ -151,7 +172,8 @@ RUN cd xorgproto                         \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXau.git
 RUN cd libXau                            \
@@ -164,7 +186,8 @@ RUN cd libXau                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
 RUN cd xcbproto                          \
@@ -175,7 +198,8 @@ RUN cd xcbproto                          \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libxcb.git
 RUN cd libxcb                            \
@@ -189,7 +213,8 @@ RUN cd libxcb                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libX11.git
 RUN cd libX11                            \
@@ -201,7 +226,8 @@ RUN cd libX11                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXext.git
 RUN cd libXext                            \
@@ -213,7 +239,8 @@ RUN cd libXext                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXfixes.git
 RUN cd libXfixes                            \
@@ -225,7 +252,8 @@ RUN cd libXfixes                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXrender.git
 RUN cd libXrender                            \
@@ -237,7 +265,8 @@ RUN cd libXrender                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXft.git
 RUN cd libXft                            \
@@ -249,7 +278,8 @@ RUN cd libXft                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXinerama.git
 RUN cd libXinerama                            \
@@ -261,7 +291,8 @@ RUN cd libXinerama                            \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://github.com/fltk/fltk.git
 RUN cd fltk                              \
@@ -274,7 +305,8 @@ RUN cd fltk                              \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab/freedesktop.org/xdg/xdg-utils.git
 RUN cd xdg-utils                         \
@@ -287,7 +319,8 @@ RUN cd xdg-utils                         \
  && git reset --hard                     \
  && git clean -fdx                       \
  && git clean -fdx                       \
- && cd ..
+ && cd ..                                \
+ && ldconfig
 
 #RUN sleep 91 && git clone --depth=1 --recursive https://github.com/caligari87/Oblige.git
 #RUN cd Oblige                  \
