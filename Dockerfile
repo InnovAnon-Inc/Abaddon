@@ -433,7 +433,7 @@ RUN cd libX11                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXext.git
 RUN cd libXext                            \
@@ -465,7 +465,7 @@ RUN cd libXext                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXfixes.git
 RUN cd libXfixes                            \
@@ -529,7 +529,7 @@ RUN cd libXrender                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXft.git
 RUN cd libXft                            \
@@ -561,7 +561,7 @@ RUN cd libXft                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXinerama.git
 RUN cd libXinerama                            \
@@ -593,7 +593,7 @@ RUN cd libXinerama                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://github.com/fltk/fltk.git
 RUN cd fltk                              \
@@ -626,7 +626,7 @@ RUN cd fltk                              \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab/freedesktop.org/xdg/xdg-utils.git
 RUN cd xdg-utils                         \
@@ -659,7 +659,7 @@ RUN cd xdg-utils                         \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 
 #RUN sleep 91 && git clone --depth=1 --recursive https://github.com/caligari87/Oblige.git
 #RUN cd Oblige                  \
