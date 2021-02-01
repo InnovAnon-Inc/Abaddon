@@ -401,7 +401,7 @@ RUN cd libxcb                            \
  && git clean -fdx                       \
  && git clean -fdx                       \
  && cd ..                                \
- && ldconfig
+ && ldconfig || :
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libX11.git
 RUN cd libX11                            \
