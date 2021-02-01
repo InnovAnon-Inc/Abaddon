@@ -634,7 +634,7 @@ RUN cd fltk                              \
  && cd ..                                \
  && ldconfig || :
 RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab/freedesktop.org/xdg/xdg-utils.git
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xdg/xdg-utils.git
 RUN cd xdg-utils                         \
  && autoreconf -fi                       \
  && ./configure --prefix=$PREFIX         \
