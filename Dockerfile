@@ -201,41 +201,41 @@ RUN cd freetype                          \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/freedesktop/fontconfig.git
-RUN cd fontconfig                        \
- && rm -f src/fcobjshash.h               \
- && ./autogen.sh --prefix=$PREFIX        \
-      --enable-static                    \
-      --disable-shared                   \
-      --disable-docs                     \
-      FREETYPE_LIBS=$PREFIX/lib          \
-	CPPFLAGS="$CPPFLAGS"                 \
-	CXXFLAGS="$CXXFLAGS"                 \
-	CFLAGS="$CFLAGS"                     \
-	LDFLAGS="$LDFLAGS"                   \
-        CPATH="$CPATH"                                \
-        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
-        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
-        LIBRARY_PATH="$LIBRARY_PATH"                  \
-        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
-        LD_RUN_PATH="$LD_RUN_PATH"                    \
-        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
-        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
-        CC="$CC"                             \
-        CXX="$CXX"                           \
-        FC="$FC"                             \
-        NM="$NM"                             \
-        AR="$AR"                             \
-        RANLIB="$RANLIB"                     \
-        STRIP="$STRIP"                       \
- && make                                 \
- && make install                         \
- && git reset --hard                     \
- && git clean -fdx                       \
- && git clean -fdx                       \
- && cd ..                                \
- && ldconfig
+#RUN sleep 91                             \
+# && git clone --depth=1 --recursive https://github.com/freedesktop/fontconfig.git
+#RUN cd fontconfig                        \
+# && rm -f src/fcobjshash.h               \
+# && ./autogen.sh --prefix=$PREFIX        \
+#      --enable-static                    \
+#      --disable-shared                   \
+#      --disable-docs                     \
+#      FREETYPE_LIBS=$PREFIX/lib          \
+#	CPPFLAGS="$CPPFLAGS"                 \
+#	CXXFLAGS="$CXXFLAGS"                 \
+#	CFLAGS="$CFLAGS"                     \
+#	LDFLAGS="$LDFLAGS"                   \
+#        CPATH="$CPATH"                                \
+#        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+#        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+#        LIBRARY_PATH="$LIBRARY_PATH"                  \
+#        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+#        LD_RUN_PATH="$LD_RUN_PATH"                    \
+#        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+#        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+#        CC="$CC"                             \
+#        CXX="$CXX"                           \
+#        FC="$FC"                             \
+#        NM="$NM"                             \
+#        AR="$AR"                             \
+#        RANLIB="$RANLIB"                     \
+#        STRIP="$STRIP"                       \
+# && make                                 \
+# && make install                         \
+# && git reset --hard                     \
+# && git clean -fdx                       \
+# && git clean -fdx                       \
+# && cd ..                                \
+# && ldconfig
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/util/macros.git util-macros
 RUN cd util-macros                       \
