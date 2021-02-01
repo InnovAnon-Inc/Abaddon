@@ -83,6 +83,25 @@ RUN cd libpng                         \
  && ./configure --prefix=$PREFIX      \
       --enable-static                 \
       --disable-shared                \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                              \
  && make install                      \
  && git reset --hard                  \
@@ -117,6 +136,25 @@ RUN cd libexpat/expat                    \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && cd ..                                \
@@ -137,6 +175,25 @@ RUN cd freetype                          \
       --enable-static                    \
       --disable-shared                   \
       FREETYPE_LIBS=$PREFIX/lib          \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -152,6 +209,26 @@ RUN cd fontconfig                        \
       --enable-static                    \
       --disable-shared                   \
       --disable-docs                     \
+      FREETYPE_LIBS=$PREFIX/lib          \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -166,6 +243,25 @@ RUN cd util-macros                       \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make install                         \
  && git reset --hard                     \
  && git clean -fdx                       \
@@ -180,6 +276,25 @@ RUN cd xorgproto                         \
       --enable-static                    \
       --disable-shared                   \
       -Dlegacy=true                      \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make install                         \
  && git reset --hard                     \
  && git clean -fdx                       \
@@ -193,6 +308,25 @@ RUN cd libXau                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -206,6 +340,25 @@ RUN cd xcbproto                          \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make install                         \
  && git reset --hard                     \
  && git clean -fdx                       \
@@ -220,6 +373,25 @@ RUN cd libxcb                            \
       --enable-static                    \
       --disable-shared                   \
       --without-doxygen                  \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -233,6 +405,25 @@ RUN cd libX11                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -246,6 +437,25 @@ RUN cd libXext                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -259,6 +469,25 @@ RUN cd libXfixes                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -272,6 +501,25 @@ RUN cd libXrender                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -285,6 +533,25 @@ RUN cd libXft                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -298,6 +565,25 @@ RUN cd libXinerama                            \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -312,6 +598,25 @@ RUN cd fltk                              \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-shared                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
@@ -326,6 +631,25 @@ RUN cd xdg-utils                         \
  && ./configure --prefix=$PREFIX         \
       --enable-static                    \
       --disable-static                   \
+	CPPFLAGS="$CPPFLAGS"                 \
+	CXXFLAGS="$CXXFLAGS"                 \
+	CFLAGS="$CFLAGS"                     \
+	LDFLAGS="$LDFLAGS"                   \
+        CPATH="$CPATH"                                \
+        C_INCLUDE_PATH="$C_INCLUDE_PATH"              \
+        OBJC_INCLUDE_PATH="$OBJC_INCLUDE_PATH"        \
+        LIBRARY_PATH="$LIBRARY_PATH"                  \
+        LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+        LD_RUN_PATH="$LD_RUN_PATH"                    \
+        PKG_CONFIG_LIBDIR="$PKG_CONFIG_LIBDIR"        \
+        PKG_CONFIG_PATH="$PKG_CONFIG_PATH"            \
+        CC="$CC"                             \
+        CXX="$CXX"                           \
+        FC="$FC"                             \
+        NM="$NM"                             \
+        AR="$AR"                             \
+        RANLIB="$RANLIB"                     \
+        STRIP="$STRIP"                       \
  && make                                 \
  && make install                         \
  && git reset --hard                     \
