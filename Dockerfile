@@ -64,8 +64,12 @@ ENV  LDFLAGS="-fipa-profile -fprofile-reorder-functions -fvpt $LDFLAGS"
 # Debug
 ENV CPPFLAGS="-DNDEBUG $CPPFLAGS"
 
-RUN sleep 91                          \
- && git clone --depth=1 --recursive https://github.com/madler/zlib.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/madler/zlib.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd zlib                           \
  && ./configure --prefix=$PREFIX      \
       --const --static --64           \
@@ -76,8 +80,12 @@ RUN cd zlib                           \
  && git clean -fdx                    \
  && cd ..                             \
  && ldconfig
-RUN sleep 91                          \
- && git clone --depth=1 --recursive https://github.com/glennrp/libpng.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/glennrp/libpng.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libpng                         \
  && autoreconf -fi                    \
  && ./configure --prefix=$PREFIX      \
@@ -109,8 +117,12 @@ RUN cd libpng                         \
  && git clean -fdx                    \
  && cd ..                             \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/libjpeg-turbo/libjpeg-turbo.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/libjpeg-turbo/libjpeg-turbo.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libjpeg-turbo                     \
  && mkdir -v build                       \
  && cd       build                       \
@@ -129,8 +141,12 @@ RUN cd libjpeg-turbo                     \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/libexpat/libexpat.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/libexpat/libexpat.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libexpat/expat                    \
  && ./buildconf.sh                       \
  && ./configure --prefix=$PREFIX         \
@@ -163,8 +179,12 @@ RUN cd libexpat/expat                    \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/freetype/freetype.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/freetype/freetype.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd freetype                          \
  && sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg \
  && sed -r  "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:"       \
@@ -201,8 +221,12 @@ RUN cd freetype                          \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/freedesktop/fontconfig.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/freedesktop/fontconfig.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd fontconfig                        \
  && rm -f src/fcobjshash.h               \
  && ./autogen.sh --prefix=$PREFIX        \
@@ -236,8 +260,12 @@ RUN cd fontconfig                        \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/util/macros.git util-macros
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/util/macros.git util-macros \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd util-macros                       \
  && ./autogen.sh                         \
  && ./configure --prefix=$PREFIX         \
@@ -268,8 +296,12 @@ RUN cd util-macros                       \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xorgproto.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xorgproto.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd xorgproto                         \
  && ./autogen.sh                         \
  && ./configure --prefix=$PREFIX         \
@@ -301,8 +333,12 @@ RUN cd xorgproto                         \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXau.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXau.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXau                            \
  && ./autogen.sh                         \
  && ./configure --prefix=$PREFIX         \
@@ -334,8 +370,12 @@ RUN cd libXau                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/proto/xcbproto.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd xcbproto                          \
  && ls -ltra \
  && autoreconf -fi \
@@ -367,8 +407,12 @@ RUN cd xcbproto                          \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libxcb.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libxcb.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libxcb                            \
  && autoreconf -fi \
  && CFLAGS="-Wno-error=format-extra-args $CFLAGS" \
@@ -402,8 +446,12 @@ RUN cd libxcb                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libX11.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libX11.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libX11                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -435,8 +483,12 @@ RUN cd libX11                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXext.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXext.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXext                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -468,8 +520,12 @@ RUN cd libXext                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXfixes.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXfixes.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXfixes                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -501,8 +557,12 @@ RUN cd libXfixes                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXrender.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXrender.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXrender                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -534,8 +594,12 @@ RUN cd libXrender                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXft.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXft.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXft                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -567,8 +631,12 @@ RUN cd libXft                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXinerama.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libXinerama.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd libXinerama                            \
  && autoreconf -fi \
  && ./configure --prefix=$PREFIX         \
@@ -600,8 +668,12 @@ RUN cd libXinerama                            \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://github.com/fltk/fltk.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/fltk/fltk.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd fltk                              \
  && ./autogen.sh                         \
  && ./configure --prefix=$PREFIX         \
@@ -633,8 +705,12 @@ RUN cd fltk                              \
  && git clean -fdx                       \
  && cd ..                                \
  && ldconfig || :
-RUN sleep 91                             \
- && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xdg/xdg-utils.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xdg/xdg-utils.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd xdg-utils                         \
  && autoreconf -fi                       \
  && ./configure --prefix=$PREFIX         \
@@ -675,15 +751,23 @@ RUN cd xdg-utils                         \
 # && make normalize             \
 # && make                       \
 # && make install
-RUN sleep 91                   \
- && git clone --depth=1 --recursive https://github.com/InnovAnon-Inc/Oblige.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/InnovAnon-Inc/Oblige.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd Oblige                  \
  && make normalize             \
  && make                       \
  && make install
 
-RUN sleep 91                        \
- && git clone --depth=1 --recursive https://github.com/caligari87/ObAddon.git
+RUN for k in $(seq 5) ; do                                               \
+      sleep 91                                                           \
+ && git clone --depth=1 --recursive https://github.com/caligari87/ObAddon.git \
+   && break                                                              \
+   || (( k != 5 ))                                                       \
+  ; done
 RUN cd ObAddon/scripts              \
  && chmod -v +x normalize-source.sh \
  && make normalize                  \
