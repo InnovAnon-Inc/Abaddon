@@ -370,6 +370,7 @@ RUN cd xcbproto                          \
 RUN sleep 91                             \
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libxcb.git
 RUN cd libxcb                            \
+ && autoreconf -fi \
  && CFLAGS="-Wno-error=format-extra-args $CFLAGS" \
     ./configure --prefix=$PREFIX         \
       --enable-static                    \
