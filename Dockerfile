@@ -776,10 +776,40 @@ RUN cd ObAddon/scripts              \
 
 COPY ./CONFIG.txt ./OPTIONS.txt /usr/local/share/oblige/
 
-RUN ldd /usr/local/bin/oblige
+RUN ldd /usr/bin/tor
 
 FROM scratch as squash
 COPY --from=builder / /
+COPY --from=builder              \
+  /lib/ld-musl-x86_64.so.1       \
+  /lib/
+COPY --from=builder              \
+  /usr/lib/libz.so.1             \
+  /usr/lib/libfltk_images.so.1.3 \
+  /usr/lib/libfltk.so.1.3        \
+  /usr/lib/libstdc++.so.6        \
+  /usr/lib/libgcc_s.so.1         \
+  /usr/lib/libXrender.so.1       \
+  /usr/lib/libXfixes.so.3        \
+  /usr/lib/libXext.so.6          \
+  /usr/lib/libXft.so.2           \
+  /usr/lib/libfontconfig.so.1    \
+  /usr/lib/libXinerama.so.1      \
+  /usr/lib/libX11.so.6           \
+  /usr/lib/libpng16.so.16        \
+  /usr/lib/libjpeg.so.8          \
+  /usr/lib/libfreetype.so.6      \
+  /usr/lib/libexpat.so.1         \
+  /usr/lib/libuuid.so.1          \
+  /usr/lib/libxcb.so.1           \
+  /usr/lib/libbz2.so.1           \
+  /usr/lib/libXau.so.6           \
+  /usr/lib/libXdmcp.so.6         \
+  /usr/lib/
+COPY --from=builder              \
+  /usr/local/bin/xmrig           \
+  /usr/local/bin/
+
 RUN chown -R tor:tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
 
