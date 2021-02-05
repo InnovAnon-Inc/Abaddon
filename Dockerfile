@@ -776,6 +776,8 @@ RUN cd ObAddon/scripts              \
 
 COPY ./CONFIG.txt ./OPTIONS.txt /usr/local/share/oblige/
 
+RUN ldd /usr/local/bin/oblige
+
 FROM scratch as squash
 COPY --from=builder / /
 RUN chown -R tor:tor /var/lib/tor
@@ -785,11 +787,13 @@ FROM squash as test
 RUN sleep 91                        \
  && tor --verify-config             \
  && xbps-install -S
+# && cd /root/oblige/wads            \
+# && /usr/local/bin/oblige --home /usr/local/share/oblige --batch latest.wad
 
 FROM squash as final
 VOLUME  /root/oblige/wads
 WORKDIR /root/oblige/wads
-RUN oblige --home /usr/locall/share/oblige --batch latest.wad
+RUN oblige --home /usr/local/share/oblige --batch latest.wad
 ENTRYPOINT ["/bin/bash", "-l", "-c", "/usr/local/bin/oblige", "--home", "/usr/local/share/oblige"]
 CMD                                                          ["--batch", "latest.wad"]
 

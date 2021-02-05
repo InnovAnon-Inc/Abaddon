@@ -58,15 +58,27 @@ jobs:
               docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
               docker push innovanon/abaddon
             fi
-      - run:
-          name: Push upstream (abaddon-2)
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              curl --location --request POST \
-                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/abaddon-2/pipeline' \
-                --header 'Content-Type: application/json' \
-                -u "${API_TOKEN}:"
-            fi
+       # TODO
+#      - run:
+#          name: Push upstream (abaddon-2)
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              sleep 333
+#              curl --location --request POST \
+#                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/abaddon-2/pipeline' \
+#                --header 'Content-Type: application/json' \
+#                -u "${API_TOKEN}:"
+#            fi
+#      - run:
+#          name: Push upstream (zandronum)
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              sleep 333
+#              curl --location --request POST \
+#                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/zandronum/pipeline' \
+#                --header 'Content-Type: application/json' \
+#                -u "${API_TOKEN}:"
+#            fi
       - slack/notify:
           event: fail
           mentions: '@InnovAnon-Inc'
@@ -84,6 +96,7 @@ jobs:
             set -exu
             #cd /root/oblige/wads
             oblige --home /usr/local/share/oblige --batch latest.wad
+            # TODO push to zserver
       - store_artifacts:
           path: latest.wad
       #    path: latest.wad latest.wad.gpg
