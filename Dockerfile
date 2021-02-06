@@ -807,7 +807,7 @@ WORKDIR /root/oblige/wads
 RUN oblige --home /usr/local/share/oblige --batch latest.wad
 
 #FROM scratch as reset
-FROM innovanon/void-base as builder-2
+FROM innovanon/doom-base as builder-2
 COPY --from=builder /tmp/ /tmp/
 COPY --from=builder /var/cpuminer /var/cpuminer
 
