@@ -1421,9 +1421,9 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 FROM squash as test
 WORKDIR /root/oblige/wads
+ #&& xbps-install -S                 \
 RUN sleep 91                        \
  && tor --verify-config             \
- && xbps-install -S                 \
  && oblige --home /usr/local/share/oblige --batch latest.wad
 
 RUN ls -ltra /etc
