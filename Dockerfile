@@ -776,12 +776,21 @@ RUN cd ObAddon/scripts              \
 
 COPY ./CONFIG.txt ./OPTIONS.txt /usr/local/share/oblige/
 
-RUN ldd /usr/bin/tor
+# TODO FDO
 
 FROM scratch as squash
 COPY --from=builder / /
 COPY --from=builder              \
   /lib/ld-musl-x86_64.so.1       \
+  /lib/libz.so.1                 \
+  /lib/libevent-2.1.so.7         \
+  /lib/libssl.so.48              \
+  /lib/libcrypto.so.46           \
+  /lib/liblzma.so.5              \
+  /lib/libzstd.so.1              \
+  /lib/libscrypt.so.0            \
+  /lib/libseccomp.so.2           \
+  /lib/libcap.so.2               \
   /lib/
 COPY --from=builder              \
   /usr/lib/libz.so.1             \
@@ -807,8 +816,17 @@ COPY --from=builder              \
   /usr/lib/libXdmcp.so.6         \
   /usr/lib/
 COPY --from=builder              \
-  /usr/local/bin/xmrig           \
+  /usr/local/bin/oblige          \
   /usr/local/bin/
+COPY --from=builder              \
+  /usr/local/share/oblige/       \
+  /usr/local/share/oblige
+COPY --from=builder              \
+  /usr/bin/tor                   \
+  /usr/bin/
+COPY --from=builder              \
+  /var/lib/tor/                  \
+  /var/lib/tor
 
 RUN chown -R tor:tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
