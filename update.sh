@@ -8,7 +8,8 @@ for k in $(seq 5) ; do
   for K in $(seq $((2 ** k))) ; do
     sleep 91
   done
-  xbps-install -Suy || continue
+  #xbps-install -Suy || continue
+  apt update || continue
   FLAG=1
   break
 done
