@@ -1429,7 +1429,7 @@ RUN ls -ltra /etc
 RUN ls -ltra /usr/local/bin
 RUN ls -ltra /usr/local
 
-FROM scratch from squash-2
+FROM scratch as squash-2
 COPY --from=squash               \
   /lib/ld-musl-x86_64.so.1       \
   /lib/libz.so.1                 \
