@@ -25,9 +25,9 @@ for k in $(seq 7) ; do
 #		    libXext-devel libXrender-devel libXft-devel libXinerama-devel        \
 #		    fltk-devel xdg-utils libXfixes-devel glu-devel || continue
    apt install -y gettext gperf pkg-config po4a texinfo zip \
-	          libfontconfig-dev xorgproto libXau-dev libxcb-dev libX11-dev \
-		  libXext-dev libXrender-dev libXft-dev libXinerama-dev \
-		  libftk1.1-dev xdg-utils libXfixes-dev glu-dev || continue
+	          libfontconfig-dev libxau-dev libxcb1-dev libx11-dev \
+		  libxext-dev libxrender-dev libxft-dev libxinerama-dev \
+		  libftk1.3-dev xdg-utils libxfixes-dev libglu1-mesa-dev || continue
   FLAG=1
   break
 done
