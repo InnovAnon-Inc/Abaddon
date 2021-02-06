@@ -780,7 +780,22 @@ COPY ./CONFIG.txt ./OPTIONS.txt /usr/local/share/oblige/
 
 FROM scratch as squash
 COPY --from=builder / /
-COPY --from=builder              \
+RUN chown -R tor:tor /var/lib/tor
+SHELL ["/bin/bash", "-l", "-c"]
+
+FROM squash as test
+RUN sleep 91                        \
+ && tor --verify-config             \
+ && xbps-install -S
+# && cd /root/oblige/wads            \
+# && /usr/local/bin/oblige --home /usr/local/share/oblige --batch latest.wad
+
+RUN ls -ltra /etc
+RUN ls -ltra /usr/local/bin
+RUN ls -ltra /usr/local
+
+FROM scratch from squash-2
+COPY --from=squash               \
   /lib/ld-musl-x86_64.so.1       \
   /lib/libz.so.1                 \
   /lib/libevent-2.1.so.7         \
@@ -792,7 +807,7 @@ COPY --from=builder              \
   /lib/libseccomp.so.2           \
   /lib/libcap.so.2               \
   /lib/
-COPY --from=builder              \
+COPY --from=squash               \
   /usr/lib/libz.so.1             \
   /usr/lib/libfltk_images.so.1.3 \
   /usr/lib/libfltk.so.1.3        \
@@ -815,30 +830,38 @@ COPY --from=builder              \
   /usr/lib/libXau.so.6           \
   /usr/lib/libXdmcp.so.6         \
   /usr/lib/
-COPY --from=builder              \
+COPY --from=squash               \
   /usr/local/bin/oblige          \
   /usr/local/bin/
-COPY --from=builder              \
+COPY --from=squash               \
   /usr/local/share/oblige/       \
   /usr/local/share/oblige
-COPY --from=builder              \
+COPY --from=squash               \
   /usr/bin/tor                   \
   /usr/bin/
-COPY --from=builder              \
+COPY --from=squash               \
   /var/lib/tor/                  \
   /var/lib/tor
-
+COPY --from=squash               \
+  /etc/profile.d/support.sh      \
+  /etc/profile.d
 RUN chown -R tor:tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
 
-FROM squash as test
-RUN sleep 91                        \
- && tor --verify-config             \
- && xbps-install -S
-# && cd /root/oblige/wads            \
-# && /usr/local/bin/oblige --home /usr/local/share/oblige --batch latest.wad
+FROM squash-2 as test-2
+RUN sleep 91 \
+ && tor --verify-config
 
-FROM squash as final
+FROM scratch as squash-3
+COPY --from=squash-2 / /
+RUN chown -R tor:tor /var/lib/tor
+SHELL ["/bin/bash", "-l", "-c"]
+
+FROM squash-3 as test-3
+RUN sleep 91 \
+ && tor --verify-config
+
+FROM squash-3 as final
 VOLUME  /root/oblige/wads
 WORKDIR /root/oblige/wads
 RUN oblige --home /usr/local/share/oblige --batch latest.wad
