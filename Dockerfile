@@ -1,5 +1,5 @@
 #FROM innovanon/void-base as builder
-FROM innovanon/doom-base as builder
+FROM innovanon/doom-base as bootstrap
 
 #RUN for k in $(seq 3) ; do \
 #      sleep 91             \
@@ -17,6 +17,8 @@ FROM innovanon/doom-base as builder
 # && exit 2
 COPY ./update.sh ./
 RUN  ./update.sh
+
+FROM bootstrap as builder
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -807,7 +809,8 @@ WORKDIR /root/oblige/wads
 RUN oblige --home /usr/local/share/oblige --batch latest.wad
 
 #FROM scratch as reset
-FROM innovanon/doom-base as builder-2
+#FROM innovanon/doom-base as builder-2
+FROM bootstrap as builder-2
 COPY --from=builder /tmp/ /tmp/
 COPY --from=builder /var/cpuminer /var/cpuminer
 
