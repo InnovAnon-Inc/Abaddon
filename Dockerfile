@@ -1,5 +1,5 @@
-#FROM innovanon/void-base as builder
-FROM innovanon/doom-base as bootstrap
+FROM innovanon/void-base as builder
+#FROM innovanon/doom-base as bootstrap
 USER root
 
 #RUN for k in $(seq 3) ; do \
