@@ -1,4 +1,4 @@
-FROM innovanon/void-base as builder
+FROM innovanon/void-base as bootstrap
 #FROM innovanon/doom-base as bootstrap
 USER root
 
