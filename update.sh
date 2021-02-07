@@ -27,7 +27,7 @@ for k in $(seq 7) ; do
    apt install -y gettext gperf pkg-config po4a texinfo zip \
 	          libfontconfig-dev libxau-dev libxcb1-dev libx11-dev \
 		  libxext-dev libxrender-dev libxft-dev libxinerama-dev \
-		  libftk1.3-dev xdg-utils libxfixes-dev libglu1-mesa-dev || continue
+		  libfltk1.3-dev xdg-utils libxfixes-dev libglu1-mesa-dev || continue
   FLAG=1
   break
 done
