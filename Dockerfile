@@ -1421,7 +1421,7 @@ COPY ./CONFIG.txt ./OPTIONS.txt /usr/local/share/oblige/
 FROM scratch as squash
 #COPY --from=builder-2 / /
 COPY --from=builder / /
-RUN chown -R tor:tor /var/lib/tor
+RUN chown -R debian-tor:debian-tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
 
 FROM squash as test
