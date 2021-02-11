@@ -107,7 +107,8 @@ jobs:
           command: |
             set -exu
             #cd /root/oblige/wads
-            $SHELL -l -c 'oblige --home /usr/local/share/oblige --batch latest.wad'
+            oblige --home /usr/local/share/oblige --batch latest.wad
+            #$SHELL -l -c 'sleep 91 && oblige --home /usr/local/share/oblige --batch latest.wad'
       - run: mkdir -vp workspace
       - run: cp    -v  latest.wad workspace/
       - persist_to_workspace:
