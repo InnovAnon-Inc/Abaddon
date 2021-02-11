@@ -22,7 +22,7 @@ workflows:
               only:
                 - master
     jobs:
-      - nightly
+      - nightly:
           context:
             - default
       - release:
