@@ -23,7 +23,7 @@ workflows:
                 - master
     jobs:
       - nightly
-      - release
+      - release:
           requires:
             - nightly
 
