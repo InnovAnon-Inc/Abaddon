@@ -23,6 +23,9 @@ workflows:
                 - master
     jobs:
       - nightly
+      - release
+          requires:
+            - nightly
 
 jobs:
   build:
@@ -88,16 +91,83 @@ jobs:
           template: success_tagged_deploy_1
 
   nightly:
-    docker: 
+    docker:
       - image: innovanon/abaddon:latest
     steps:
       - run:
+          name: Sanity Check
+          command: |
+            tor --verify-config
+      - run:
+          name: Build Maps/WAD
           command: |
             set -exu
             #cd /root/oblige/wads
-            oblige --home /usr/local/share/oblige --batch latest.wad
-            # TODO push to zserver
-      - store_artifacts:
-          path: latest.wad
+            $SHELL -l -c 'oblige --home /usr/local/share/oblige --batch latest.wad'
+      - run: mkdir -vp workspace
+      - run: cp    -v  latest.wad workspace/
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - latest.wad
+      #- store_artifacts:
+      #    path: latest.wad
       #    path: latest.wad latest.wad.gpg
-      
+  release:
+    docker: 
+      - image: innovanon/pusher:latest
+    steps:
+      - run:
+          name: Sanity Check
+          command: |
+            tor --verify-config
+            #command -v ghr
+      - run:
+          name: Insanity Check
+          command: |
+            export GOPATH="${HOME}/go"
+            export   PATH="${PATH}:${GOPATH}/bin"
+            $SHELL -l -c 'command -v ghr'
+      - run:
+          name: Checkout Project
+          command: |
+            $SHELL -l -c "sleep 31 && git clone --recursive https://github.com/InnovAnon-Inc/${CIRCLE_PROJECT_REPONAME}.git"
+      - run:
+          name: Import GPG Key
+          command: |
+            set -u
+            echo -e "$GPG_KEY" | \
+            gpg --import
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Sign Project
+          command: |
+            cd /tmp/workspace
+            gpg --sign latest.wad
+      - run:
+          name: Release Project
+          command: |
+            cd ${CIRCLE_PROJECT_REPONAME}
+
+            [ ! -z "`git tag`" ] || \
+            git tag v1.0
+            git describe --tags --long | \
+            grep -o '^v[^.]*\.[^.-]*' || \
+            git tag v1.0
+            revisioncount="$(git log --oneline | wc -l)"
+            cleanversion="$(git describe --tags --long | grep -o '^v[^.]*\.[^.-]*' | sed s/^v//)"
+            VERSION="$cleanversion.$revisioncount"
+
+            export GOPATH="${HOME}/go"
+            export   PATH="${PATH}:${GOPATH}/bin"
+            $SHELL -l -c "sleep 31 && ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete v${VERSION} /tmp/workspace"
+
+      - slack/notify:
+          event: fail
+          mentions: '@InnovAnon-Inc'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+
