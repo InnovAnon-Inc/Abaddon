@@ -864,17 +864,20 @@ RUN tar xf /tmp/squash.tar -C / \
  && rm -v  /tmp/squash.tar      \
  && chown -R tor:tor /var/lib/tor
 SHELL ["/bin/bash", "-l", "-c"]
+WORKDIR /opt/wads
 
-FROM squash as test
-RUN tor --verify-config             \
- && sleep 127                       \
- && oblige --home /usr/local/share/oblige --batch latest.wad
-
-FROM squash as final
-VOLUME  /root/oblige/wads
-WORKDIR /root/oblige/wads
+#FROM squash as test
+RUN tor --verify-config              \
+ && cd /opt/wads                     \
+ && oblige                           \
+      --home /usr/local/share/oblige \
+      --batch /opt/wads/latest.wad   \
+ && test -f   /opt/wads/latest.wad
+#
+#FROM squash as final
+VOLUME  /opt/wads
 ENTRYPOINT ["/bin/bash", "-l", "-c", \
             "sleep", "127", "&&",    \
             "oblige", "--home", "/usr/local/share/oblige"]
-CMD        [          "--batch", "latest.wad"]
+CMD        [          "--batch", "/opt/wads/latest.wad"]
 
